@@ -23,10 +23,10 @@ jobs:
   db-init:
     name: Database Initialization
     runs-on: ubuntu-latest
-    environment: "choice is ${{ github.event.inputs.choice }}"
+    environment: "{{ env.ENVIRONMENT }}"
     steps:
       - name: test
-        run: echo "{{ env.ENVIRONMENT }}"
+        run: echo {{ env.ENVIRONMENT }}
       # - name: "Checkout pipeline"
       #   uses: actions/checkout@v2
 
