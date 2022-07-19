@@ -2,16 +2,18 @@ name: UAT - Database Initialization
 
 on:
   workflow_dispatch:
-  choice:
-    type: choice
-    description: environment
-    options:
-      - dev
-      - sit
-      - uat
+    inputs:
+      choice:
+        type: choice
+        required: true
+        description: environment
+        options:
+          - dev
+          - sit
+          - uat
 
 env:
-  ENVIRONMENT: {{ github.event.inputs.choice }}
+  ENVIRONMENT: "{{ github.event.inputs.choice }}"
   POSTGRES_HOST: psql-ikm-az-asse-dev-001.postgres.database.azure.com
   POSTGRES_PORT: 5432
   POSTGRES_DB: UAT_IKMPTDB
@@ -24,7 +26,7 @@ jobs:
     environment: "choice is ${{ github.event.inputs.choice }}"
     steps:
       - name: test
-      - run: {{ env.ENVIRONMENT }}
+      - run: echo "{{ env.ENVIRONMENT }}"
       # - name: "Checkout pipeline"
       #   uses: actions/checkout@v2
 
