@@ -22,7 +22,7 @@ env:
 jobs:
   db-init:
     name: Database Initialization
-    runs-on: [self-hosted, ikm-dev]
+    runs-on: ubuntu-latest
     environment: "choice is ${{ github.event.inputs.choice }}"
     steps:
       - name: test
