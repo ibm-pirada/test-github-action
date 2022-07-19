@@ -1,0 +1,49 @@
+name: UAT - Database Initialization
+
+on:
+  workflow_dispatch:
+  choice:
+    type: choice
+    description: environment
+    options:
+      - dev
+      - sit
+      - uat
+
+env:
+  ENVIRONMENT: {{ github.event.inputs.choice }}
+  POSTGRES_HOST: psql-ikm-az-asse-dev-001.postgres.database.azure.com
+  POSTGRES_PORT: 5432
+  POSTGRES_DB: UAT_IKMPTDB
+  POSTGRES_DB_DEFAULT: postgres
+
+jobs:
+  db-init:
+    name: Database Initialization
+    runs-on: [self-hosted, ikm-dev]
+    environment: "choice is ${{ github.event.inputs.choice }}"
+    steps:
+      - name: test
+      - run: {{ env.ENVIRONMENT }}
+      # - name: "Checkout pipeline"
+      #   uses: actions/checkout@v2
+
+      # - name: Login via Azure CLI
+      #   id: az-login
+      #   run: |
+      #     az login --identity --username ${{ secrets.AZURE_SELFHOST_USER_MANAGE_IDENTITY_CLIENT_ID }}
+      #     az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # - name: 'Run SQL Create Table Script'
+      #   run: |
+      #     export PGPASSWORD="${{ secrets.POSTGRESQL_DBPWD_ADMIN }}"
+      #     psql -h ${{ env.POSTGRES_HOST }} -p ${{ env.POSTGRES_PORT }} -U "${{ secrets.POSTGRESQL_DBUSER_ADMIN }}" -d ${{ env.POSTGRES_DB }} -a -f ./sql/${{ env.ENVIRONMENT }}/iKM.sql
+
+      # - name: 'Run SQL Grant Access Script'
+      #   run: |
+      #     export PGPASSWORD="${{ secrets.POSTGRESQL_DBPWD_ADMIN }}"
+      #     psql -h ${{ env.POSTGRES_HOST }} -p ${{ env.POSTGRES_PORT }} -U "${{ secrets.POSTGRESQL_DBUSER_ADMIN }}" -d ${{ env.POSTGRES_DB }} -a -f ./sql/${{ env.ENVIRONMENT }}/GRANT_ACCESS.sql
+
+        # for filepath in ./sql/${{ env.ENVIRONMENT }}/*.sql; do
+        #     psql -h ${{ env.POSTGRES_HOST }} -p ${{ env.POSTGRES_PORT }} -U "${{ secrets.POSTGRESQL_DBUSER_ADMIN }}" -d ${{ env.POSTGRES_DB }} -a -f ${filepath}
+        # done
