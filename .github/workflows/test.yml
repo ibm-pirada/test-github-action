@@ -26,7 +26,7 @@ jobs:
     environment: "choice is ${{ github.event.inputs.choice }}"
     steps:
       - name: test
-      - run: echo "{{ env.ENVIRONMENT }}"
+        run: echo "{{ env.ENVIRONMENT }}"
       # - name: "Checkout pipeline"
       #   uses: actions/checkout@v2
 
