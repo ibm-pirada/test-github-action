@@ -23,16 +23,16 @@ jobs:
   db-init:
     name: Database Initialization
     runs-on: ubuntu-latest
-    environment: "{{ env.ENVIRONMENT }}"
+    environment: "${{ env.ENVIRONMENT }}"
     steps:
       - name: test
-        run: echo {{ env.ENVIRONMENT }}
+        run: echo ${{ env.ENVIRONMENT }}
 
       - name: Run a one-line script
         run: echo Hello, world!
 
       - name: Run a one-line script2
-        run: echo {{ env.POSTGRES_HOST }}
+        run: echo ${{ env.POSTGRES_HOST }}
       # - name: "Checkout pipeline"
       #   uses: actions/checkout@v2
 
