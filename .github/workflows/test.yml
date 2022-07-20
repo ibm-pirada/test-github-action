@@ -13,7 +13,7 @@ on:
           - uat
 
 env:
-  ENVIRONMENT: "${{ inputs.choice }}"
+  # ENVIRONMENT: "${{ inputs.choice }}"
   POSTGRES_HOST: psql-ikm-az-asse-dev-001.postgres.database.azure.com
   POSTGRES_PORT: 5432
   POSTGRES_DB: UAT_IKMPTDB
